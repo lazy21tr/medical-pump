@@ -45,7 +45,7 @@ static void ParseAndApplyCommand(UserCommand command, char * param) {
             COM1.pc.printf("FVer: %d", FIRMWARE_VERSION);
             break;
         case RUN_PERISTALTIC_MOTOR:
-            sscanf(param, "%d", &motorSpeed);
+            sscanf(&param[1], "%d", &motorSpeed);
             run_peristaltic_motor(motorSpeed);
             break;
         case RUN_STEPPER_MOTOR:
@@ -60,6 +60,7 @@ static void ParseAndApplyCommand(UserCommand command, char * param) {
             } else {
                 pic.disableTwoWay = FALSE;
             }
+           
             sscanf(&param[1], "%d", &pic.setValue);
             pic.controllerON = TRUE;
             acquireBalancerValueCont(BALANCER1);

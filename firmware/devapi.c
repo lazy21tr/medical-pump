@@ -20,13 +20,14 @@ void init_pi_controller(void) {
 }
 
 void run_peristaltic_motor(long int speed) {
-    if (speed < 0) {
+    if (speed <= 0) {
         SetPumpMotorDirection(CCW);
         speed = -speed;
     } else {
         SetPumpMotorDirection(CW);
     }
-    PWMDutyCycleReg = min(speed, PWM_PERIOD);
+    //PWMDutyCycleReg = min(speed, PWM_PERIOD);
+    PWMDutyCycleReg = min(speed, PWM_DUTY_CYCLE);
 }
 
 void commandStepperDriver(PeerDeviceCommand command, unsigned long int val) {
@@ -69,13 +70,13 @@ void pi_controller_loop(int currentValue) {
             pic.output = 0;
     }
 
-    if (abs(pic.output) < 30)
+    if (abs(pic.output) < 35)
         pic.output = 0;
     
     run_peristaltic_motor(pic.output);
     if (pic.output == 0) {
         pic.controllerON = FALSE;
-        COM1.pc.printf("Filled: %dgr.", pic.setValue);
+        COM1.pc.printf("Filled: %d ", pic.setValue);
     }
 }
 
@@ -97,15 +98,15 @@ void ParseStepperResponse(void) {
             break;
         case TASK_EXEC_COMPLETE:
             if (dsv.StepMotorDirection)
-                COM1.pc.println("Done! FW");
+                COM1.pc.println("ENJFW");
             else
-                COM1.pc.println("Done! BW");
+                COM1.pc.println("ENJBW");
             break;
         case BALANCER_OVERFLOW:
-            COM1.pc.println("Err!: UnderFlow");
+            //COM1.pc.println("Err!: UnderFlow");
             break;
         case BALANCER_OVERFLOW + 1:
-            COM1.pc.println("Err!: OverFlow");
+            //COM1.pc.println("Err!: OverFlow");
             break;
         default:
             COM1.pc.println("Err!: Unknown Response");
@@ -147,9 +148,9 @@ void ParseBalancerResponse(void) {
             break;
         case BALANCER_OVERFLOW:
             if (COM1.balancer.devID == BALANCER1)
-                COM1.pc.println("BAL1: 888888.88");
+                COM1.pc.println("BAL1: 8888.88");
             else
-                COM1.pc.println("BAL2: 888888.88");
+                COM1.pc.println("BAL2: 8888.88");
             break;
         case TASK_EXEC_COMPLETE:
             COM1.pc.println("Done!");

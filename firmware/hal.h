@@ -30,7 +30,8 @@
 #define BAUD_RATE_REG_VAL       51 //19230
 #define TIMER2_PRESCALER        T2_PS_1_256
 #define TIMER2_PERIOD_VAL       (FCY/CPU_USER_TASK_FREQ/256) //0.02sn
-#define PWM_PERIOD              832 //19230 Hz
+#define PWM_PERIOD              (FCY/19230) //19230 Hz
+#define PWM_DUTY_CYCLE          300
 #define DELAY_MS                __delay_ms
 #define DELAY_US                __delay_us
 #define SWITCH_DEBOUNCE         3

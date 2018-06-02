@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=firmware
+PROJECTNAME=Mainboard_REV9
 
 # Active Configuration
 DEFAULTCONF=default
