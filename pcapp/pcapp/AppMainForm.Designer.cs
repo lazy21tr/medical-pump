@@ -73,7 +73,6 @@
             // RS232
             // 
             this.RS232.BaudRate = 19200;
-            this.RS232.PortName = "COM2";
             this.RS232.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RS232_DataReceived);
             // 
             // menuStrip1

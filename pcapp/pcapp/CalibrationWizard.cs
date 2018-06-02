@@ -44,9 +44,9 @@ namespace pcapp
                 else if (tabControl1.SelectedIndex == 2)
                 {
                     b1 = double.Parse(message.Substring(5, message.Length - 6));
-                    gain = 100 * (v1 - v0) / (b1 - b0);
+                    gain = 10 *(v1 - v0) / (b1 - b0);
                     gainRep = calculateGainRegValue(gain);
-                    //MessageBox.Show(b0.ToString() + "," + b1.ToString() + "," + v0.ToString() + "," + v1.ToString() + "," + gain + "," + gainRep.ToString("X8"));
+                    MessageBox.Show(b0.ToString() + "," + b1.ToString() + "," + v0.ToString() + "," + v1.ToString() + "," + gain + "," + gainRep.ToString("X8"));
                     tabControl1.SelectedIndex = 3;
                     btnNext.Text = "Kapat";
                     btnNext.Enabled = true;
